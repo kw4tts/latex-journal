@@ -24,7 +24,7 @@ pdflatex -synctex=1 -interaction=nonstopmode -output-directory=output main.tex >
 
 main.tex:
 
-** the \usepackage code in my blog is broken markdown. **
+**The \usepackage code in my blog is broken markdown. Check out main.tex in the repo.**
 
 Make your log entries like:
 
@@ -33,8 +33,6 @@ Make your log entries like:
 Dear diary,\\
 ... .... ...
 ```
-
-Github: https://github.com/kw4tts/latex-journal
 
 For original looping template, special thanks to Tom Bombadil @ StackExchange - https://tex.stackexchange.com/a/68528
 
