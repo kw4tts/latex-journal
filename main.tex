@@ -1,0 +1,80 @@
+\documentclass[twoside,symmetric]{tufte-book}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usepackage{xcolor}
+\usepackage{fontawesome}
+\usepackage{microtype}
+
+\newenvironment{loggentry}[2]% date, heading
+{\noindent\textbf{#2}\marginnote{#1}\par}{\vspace{0.5cm}}
+
+
+\newcommand{\book}[1]
+{
+    \footnote{\faBook\enspace {#1}}
+}
+
+\newcommand{\music}[1]
+{
+    \footnote{\faMusic\enspace {#1}}
+}
+
+\newcommand{\travel}[1]
+{
+    \footnote{\faPlane\enspace {#1}}
+}
+
+\newcommand{\movie}[1]
+{
+    \footnote{\faPlayCircle0\enspace {#1}}
+}
+
+
+\def\?#1{}
+
+\pgfmathtruncatemacro{\StartYear}{2020}
+\pgfmathtruncatemacro{\EndYear}{2020}
+
+\newcommand{\writetitle}{0}
+\newcommand{\mytitle}[1]
+{   \ifthenelse{\writetitle=1}{#1}{}
+}
+
+
+\newread\mysource
+
+\begin{document}
+\begingroup% T&H Typography
+\raggedleft\vspace*{\baselineskip}
+{\Large Author}\\[0.167\textheight]
+{\bfseries Journaling}\\[\baselineskip]
+{\textcolor{Red}{\Huge DEAR DIARY}}\\[\baselineskip]
+\vfill
+{\Large Do not read.}\par
+\vspace*{3\baselineskip}
+\endgroup
+
+\foreach \Year in {\StartYear,...,\EndYear}
+{   \chapter{\Year}
+	\foreach \Month in {Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec}
+    {  \section{\Month}
+    	   \foreach \Day in {1,...,31}
+        {   \IfFileExists{\Year/\Month/\Day}
+                {   \openin\mysource=\Year/\Month/\Day.tex
+                    \read\mysource to \firstline
+                    \closein\mysource
+                    \xdef\writetitle{1}
+                    \begin{loggentry}{\Year\ - \Month\ - \Day}{\firstline}    
+                        \xdef\writetitle{0}
+                        \input{\Year/\Month/\Day}
+                    \end{loggentry} 
+        }
+        {   
+        }
+
+        }  
+    }
+}
+
+\end{document}
