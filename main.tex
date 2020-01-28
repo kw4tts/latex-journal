@@ -56,10 +56,17 @@
 \endgroup
 
 \foreach \Year in {\StartYear,...,\EndYear}
-{   \chapter{\Year}
-	\foreach \Month in {Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec}
-    {  \section{\Month}
-    	   \foreach \Day in {1,...,31}
+{
+   \chapter{\Year}
+    \foreach \Month in {Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec}
+    {
+        \IfFileExists{\Year/\Month/}
+        {
+            \section{\Month}
+        }
+        {
+        }
+        \foreach \Day in {1,...,31}
         {   \IfFileExists{\Year/\Month/\Day}
                 {   \openin\mysource=\Year/\Month/\Day.tex
                     \read\mysource to \firstline
