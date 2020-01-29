@@ -16,6 +16,7 @@ theMonth=$(LC_ALL=en_US.utf8 date +%b)
 theYear=$(LC_ALL=en_US.utf8 date +%Y)
 theDay=$(LC_ALL=en_US.utf8 date +%d)
 mkdir -p $theYear/$theMonth
+echo "true" > $theYear/$theMonth/entries
 vim $theYear/$theMonth/$theDay.tex 
 git add ./*
 git commit -a -m "$theDay.$theMonth.$theYear"
