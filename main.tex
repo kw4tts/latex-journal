@@ -69,12 +69,11 @@
         \IfFileExists{\Year/\Month/entries}
         {
             \section{\Month}
-        }
-        {
-        }
-        \foreach \Day in {1,...,31}
-        {   \IfFileExists{\Year/\Month/\Day}
-                {   \openin\mysource=\Year/\Month/\Day.tex
+            \foreach \Day in {01,...,31}
+            {
+                \IfFileExists{\Year/\Month/\Day}
+                {
+                    \openin\mysource=\Year/\Month/\Day.tex
                     \read\mysource to \firstline
                     \closein\mysource
                     \xdef\writetitle{1}
@@ -82,11 +81,13 @@
                         \xdef\writetitle{0}
                         \input{\Year/\Month/\Day}
                     \end{loggentry} 
+                }
+                {
+                }
+            }
         }
-        {   
+        {
         }
-
-        }  
     }
 }
 
